@@ -1,9 +1,9 @@
 import json
-import re
 import os
+import re
 import requests
-
 from zhihuAPI.get import APIURLGET
+from zhihuAPI.action import APIURLACTION
 
 
 def fix_api_url(url, cat, item):
@@ -31,13 +31,15 @@ class ZhihuAccount:
     def __init__(self, path):
         with open(path) as f:
             cookies_tmp = json.load(f)
-        self.cookies = {item['name']: item['value'] for item in cookies_tmp}
+        self.cookies = {item['name']: item['value'] for item in cookies_tmp if item['domain'] == '.zhihu.com'}
         self.headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) '
                           'Chrome/65.0.3325.181 Safari/537.36'}
 
-    def get_url_json(self, url):
-        resp = requests.get(url, cookies=self.cookies, headers=self.headers)
+    def get_url_json(self, url, _params=None):
+        if _params is None:
+            _params = {}
+        resp = requests.get(url, cookies=self.cookies, headers=self.headers, params=_params)
         if resp.status_code != requests.codes.ok:
             print("Status code:", resp.status_code, "for", url)
             raise ZhihuAPIError
@@ -49,8 +51,10 @@ class ZhihuAccount:
                 print('Cannot decode JSON for', url)
                 raise ZhihuAPIError
 
-    def get_page_json(self, cat, item, _id):
-        return self.get_url_json(APIURLGET[cat][item].format(_id))
+    def get_page_json(self, cat, item, _id, _params=None):
+        if _params is None:
+            _params = {}
+        return self.get_url_json(APIURLGET[cat][item].format(_id), _params)
 
     def get_all_pages_json(self, cat, item, _id):
         current = self.get_page_json(cat, item, _id)
@@ -98,3 +102,36 @@ class ZhihuAccount:
         info_list = self.get_all_pages_json('Members', item, user_id)
         for dic in info_list:
             self.save_html(dic['url'], item, save_dir, author)
+
+    def action(self, cat, item, _id, _data=None, _params=None):
+        if _data is None:
+            _data = {}
+        if _params is None:
+            _params = {}
+        api_info = APIURLACTION[cat][item]
+        url = api_info['url'].format(_id)
+        func_dic = {'post': requests.post, 'put': requests.put, 'delete': requests.delete}
+        func = func_dic[api_info['method']]
+        if 'data' in api_info:
+            predefined_payload = {**api_info['data']}
+        else:
+            predefined_payload = {}
+        if 'required_keys' in api_info:
+            for key in api_info['required_keys']:
+                assert key in _data
+        payload = {**predefined_payload, **_data}
+        if 'form_data' in api_info and api_info['form_data']:
+            resp = func(url, data=payload, cookies=self.cookies, headers=self.headers, params=_params)
+        else:
+            resp = func(url, json=payload, cookies=self.cookies, headers=self.headers, params=_params)
+        if 200 <= resp.status_code < 300:
+            try:
+                result = json.loads(resp.text)
+                return result
+            except json.JSONDecodeError:
+                print('Cannot decode JSON for', url)
+                return resp.text
+        else:
+            print("Status code:", resp.status_code, "for", url)
+            print(resp.text)
+            raise ZhihuAPIError

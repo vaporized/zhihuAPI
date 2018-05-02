@@ -9,9 +9,9 @@ APIURLGET = {
         # 问题信息
         "Question": "https://www.zhihu.com/api/v4/questions/{}",
         # 私信
-        "Messages": "https://www.zhihu.com/api/v4/messages",
+        "Messages": "https://www.zhihu.com/api/v4/me/message-threads",
         # 通知
-        "Notifications": "https://www.zhihu.com/api/v4/default-notifications"
+        "Notifications": "https://www.zhihu.com/api/v4/notifications/v2/default"
     },
     "Members": {
         # 关注的人
@@ -49,13 +49,24 @@ APIURLGET = {
         # 被邀请的人
         "Invitees": "https://www.zhihu.com/api/v4/questions/{}/invitees",
         # 可能被邀请的人
-        "InvitationCandidates": "https://www.zhihu.com/api/v4/questions/{}/invitation-candidates"
+        "InvitationCandidates": "https://www.zhihu.com/api/v4/questions/{}/invitation-candidates",
+        # 相关问题
+        "SimilarQuestions": "https://www.zhihu.com/api/v4/questions/{}/similar-questions",
+        #
+        "MetaRelatedTopics": "https://www.zhihu.com/api/v4/questions/{}/meta_related_topics",
+        # 相关推荐
+        "RelatedKnowledgeCommodities": "https://www.zhihu.com/api/v4/questions/{}/related-knowledge-commodities"
+
     },
     "Answers": {
         # 点赞者
         "Upvoters": "https://www.zhihu.com/api/v4/answers/{}/concerned_upvoters",
         # 评论
         "Comments": "https://www.zhihu.com/api/v4/answers/{}/comments"
+    },
+    "Comments": {
+        # 包含某评论的对话
+        "CommentsWithConversation": "https://www.zhihu.com/api/v4/comments/{}/conversation"
     },
     "Pins": {
         # 评论
