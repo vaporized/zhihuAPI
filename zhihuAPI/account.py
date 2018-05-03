@@ -44,7 +44,7 @@ class ZhihuAccount:
             _params = {}
         resp = requests.get(url, cookies=self.cookies, headers=self.headers, params=_params)
         if resp.status_code != requests.codes.ok:
-            print('Status code:', resp.status_code, 'for', url)
+            print("Status code:", resp.status_code, "for", url)
             raise ZhihuAPIError
         else:
             try:
@@ -59,8 +59,10 @@ class ZhihuAccount:
             _params = {}
         return self.get_url_json(APIURLGET[cat][item].format(_id), _params)
 
-    def get_all_pages_json(self, cat, item, _id):
-        current = self.get_page_json(cat, item, _id)
+    def get_all_pages_json(self, cat, item, _id, _params=None):
+        if _params is None:
+            _params = {}
+        current = self.get_page_json(cat, item, _id, _params)
         if not current:
             return {}
         if 'paging' not in current:
@@ -68,7 +70,7 @@ class ZhihuAccount:
         else:
             data_list = current['data']
             while not current['paging']['is_end']:
-                current = self.get_url_json(fix_api_url(current['paging']['next'], cat, item))
+                current = self.get_url_json(fix_api_url(current['paging']['next'], cat, item), _params)
                 data_list += current['data']
             return data_list
 
@@ -87,10 +89,10 @@ class ZhihuAccount:
     def get_html(self, url):
         resp = requests.get(url, cookies=self.cookies, headers=self.headers)
         if resp.status_code != requests.codes.ok:
-            print('Status code:', resp.status_code, 'for', url)
+            print("Status code:", resp.status_code, "for", url)
             raise ZhihuAPIError
         else:
-            return re.sub('<script.*?</script>', '', resp.text)
+            return re.sub("<script.*?</script>", '', resp.text)
 
     def save_html(self, url, item, save_dir, author=None):
         if author:
@@ -138,6 +140,6 @@ class ZhihuAccount:
                 print('Cannot decode JSON for', url)
                 return resp.text
         else:
-            print('Status code:', resp.status_code, 'for', url)
+            print("Status code:", resp.status_code, "for", url)
             print(resp.text)
             raise ZhihuAPIError
