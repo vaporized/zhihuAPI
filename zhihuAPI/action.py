@@ -371,8 +371,8 @@ APIURLACTION = {
         'FollowFavlist': {
             'method': 'post',
             'url': 'https://www.zhihu.com/collection/follow',
-            # optional key: 'reply_to_id':comment_id
-            'required_keys': ['content']
+            'form_data': True,
+            'required_keys': ['favlist_id']
         }
     },
     'Columns': {
