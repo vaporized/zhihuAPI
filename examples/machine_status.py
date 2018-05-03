@@ -31,7 +31,7 @@ def machine_status(cookie_path, url_token):
 
     reset = res['is_force_renamed']
     if reset:
-        print('由于违反知乎用户信息管理规范，该用户用户名已被重置。（官方称谓：reseted）')
+        print('由于违反知乎用户信息管理规范，该账号用户名已被重置。（官方称谓：reseted）')
 
 
 if __name__ == '__main__':
