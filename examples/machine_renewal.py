@@ -18,7 +18,7 @@ if __name__ == '__main__':
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--cookie', '-c', help="path to exported cookies json",
+    parser.add_argument('--cookie', '-c', help='path to exported cookies json',
                         default='/Users/vapor/Downloads/export.json')
     parser.add_argument('--url_token', '-u', help='your old account url token', required=True)
     args = parser.parse_args()

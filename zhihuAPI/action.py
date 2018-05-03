@@ -65,9 +65,9 @@ APIURLACTION = {
         'AddQuestion': {
             'method': 'post',
             'url': 'https://www.zhihu.com/api/v4/questions',
-            'data': {"type": 0},
+            'data': {'type': 0},
             # is_anonymous is boolean
-            'required_keys': ["title", "topic_url_tokens", "detail", "is_anonymous"]
+            'required_keys': ['title', 'topic_url_tokens', 'detail', 'is_anonymous']
         },
         # 发布想法
         'AddPin': {
@@ -75,15 +75,15 @@ APIURLACTION = {
             'url': 'https://www.zhihu.com/api/v4/pins',
             'data': {'version': '1', 'source_pin_id': '0'},
             'form_data': True,
-            # content must be of form json.dumps([{"type":"text","content":"<p>xxxxxxx</p>"}])
-            'required_keys': ["content"]
+            # content must be of form json.dumps([{'type':'text','content':'<p>xxxxxxx</p>'}])
+            'required_keys': ['content']
         },
         # 创建收藏夹
         'CreateFavlist': {
             'method': 'post',
             'url': 'https://www.zhihu.com/api/v4/favlists',
             # title and description are strings, is_public is boolean
-            'required_keys': ["title", "description", "is_public"]
+            'required_keys': ['title', 'description', 'is_public']
         }
     },
     'Members': {
@@ -147,7 +147,7 @@ APIURLACTION = {
         'Invite': {
             'method': 'post',
             'url': 'https://www.zhihu.com/api/v4/questions/{}/invitees',
-            'data': {'src': "search"},
+            'data': {'src': 'search'},
             'required_keys': ['member_hash']
         },
         # 启用匿名
@@ -164,8 +164,8 @@ APIURLACTION = {
         'AddAnswer': {
             'method': 'post',
             'url': 'https://www.zhihu.com/api/v4/questions/{}/answers',
-            'data': {"reward_setting": {"can_reward": False}},
-            'required_keys': ["content", "reshipment_settings", "comment_permission"]
+            'data': {'reward_setting': {'can_reward': False}},
+            'required_keys': ['content', 'reshipment_settings', 'comment_permission']
         },
         # 删除问题
         'DeleteQuestion': {
@@ -188,21 +188,21 @@ APIURLACTION = {
         'VoteUp': {
             'method': 'post',
             'url': 'https://www.zhihu.com/api/v4/answers/{}/voters',
-            'data': {'type': "up"},
+            'data': {'type': 'up'},
 
         },
         # 取消点赞/反对回答
         'CancelVote': {
             'method': 'post',
             'url': 'https://www.zhihu.com/api/v4/answers/{}/voters',
-            'data': {'type': "neutral"},
+            'data': {'type': 'neutral'},
 
         },
         # 反对回答
         'VoteDown': {
             'method': 'post',
             'url': 'https://www.zhihu.com/api/v4/answers/{}/voters',
-            'data': {'type': "down"},
+            'data': {'type': 'down'},
 
         },
         # 评论回答
@@ -236,7 +236,7 @@ APIURLACTION = {
         'SetCommentPermission': {
             'method': 'put',
             'url': 'https://www.zhihu.com/api/v4/answers/{}',
-            # the value should be "all","censor","followee", or "nobody"
+            # the value should be 'all','censor','followee', or 'nobody'
             'required_keys': ['comment_permission']
         },
         # 修改转载设置
@@ -244,15 +244,15 @@ APIURLACTION = {
             'method': 'post',
             'url': 'https://www.zhihu.com/api/v4/answers/{}',
 
-            # the value should be "disallowed",'allowed',"need_payment"
+            # the value should be 'disallowed','allowed','need_payment'
             'required_keys': ['reshipment_settings']
         },
         # 修改回答
         'EditAnswer': {
             'method': 'put',
             'url': 'https://www.zhihu.com/api/v4/answers/{}',
-            'data': {"reward_setting": {"can_reward": False}},
-            'required_keys': ["content"]
+            'data': {'reward_setting': {'can_reward': False}},
+            'required_keys': ['content']
         },
         # 删除回答
         'DeleteAnswer': {
@@ -357,8 +357,8 @@ APIURLACTION = {
         'AddEntry': {
             'method': 'post',
             'url': 'https://www.zhihu.com/api/v4/favlists/{}/items',
-            # content_type should be "answer", "pin" or "article"
-            'required_keys': ["content_id", "content_type"]
+            # content_type should be 'answer', 'pin' or 'article'
+            'required_keys': ['content_id', 'content_type']
         },
         # 评论收藏夹
         'AddComment': {
@@ -399,7 +399,7 @@ APIURLACTION = {
         'SetCommentPermission': {
             'method': 'put',
             'url': 'https://www.zhihu.com/api/v4/articles/{}',
-            # the value should be "all","censor","followee", or "nobody"
+            # the value should be 'all','censor','followee', or 'nobody'
             'required_keys': ['comment_permission']
         },
         # 删除文章

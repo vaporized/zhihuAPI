@@ -10,8 +10,8 @@ from zhihuAPI.get import APIURLGET
 
 
 def fix_api_url(url, cat, item):
-    if cat == 'Members' and item in ["FollowingQuestions", "Answers",
-                                     "Questions", "Articles", "Columns", "FollowingColumns"]:
+    if cat == 'Members' and item in ['FollowingQuestions', 'Answers',
+                                     'Questions', 'Articles', 'Columns', 'FollowingColumns']:
         return re.sub('zhihu.com/', 'zhihu.com/api/v4/', url)
     else:
         return url
@@ -44,7 +44,7 @@ class ZhihuAccount:
             _params = {}
         resp = requests.get(url, cookies=self.cookies, headers=self.headers, params=_params)
         if resp.status_code != requests.codes.ok:
-            print("Status code:", resp.status_code, "for", url)
+            print('Status code:', resp.status_code, 'for', url)
             raise ZhihuAPIError
         else:
             try:
@@ -87,10 +87,10 @@ class ZhihuAccount:
     def get_html(self, url):
         resp = requests.get(url, cookies=self.cookies, headers=self.headers)
         if resp.status_code != requests.codes.ok:
-            print("Status code:", resp.status_code, "for", url)
+            print('Status code:', resp.status_code, 'for', url)
             raise ZhihuAPIError
         else:
-            return re.sub("<script.*?</script>", '', resp.text)
+            return re.sub('<script.*?</script>', '', resp.text)
 
     def save_html(self, url, item, save_dir, author=None):
         if author:
@@ -138,6 +138,6 @@ class ZhihuAccount:
                 print('Cannot decode JSON for', url)
                 return resp.text
         else:
-            print("Status code:", resp.status_code, "for", url)
+            print('Status code:', resp.status_code, 'for', url)
             print(resp.text)
             raise ZhihuAPIError

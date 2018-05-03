@@ -16,7 +16,7 @@ if __name__ == '__main__':
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--cookie', '-c', help="path to exported cookies json",
+    parser.add_argument('--cookie', '-c', help='path to exported cookies json',
                         default='/Users/vapor/Downloads/export.json')
     args = parser.parse_args()
     mourn_machines(args.cookie)
