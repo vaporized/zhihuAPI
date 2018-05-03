@@ -1,9 +1,12 @@
 import json
 import os
 import re
+import time
+
 import requests
-from zhihuAPI.get import APIURLGET
+
 from zhihuAPI.action import APIURLACTION
+from zhihuAPI.get import APIURLGET
 
 
 def fix_api_url(url, cat, item):
@@ -69,9 +72,12 @@ class ZhihuAccount:
                 data_list += current['data']
             return data_list
 
-    def save_all_pages_json(self, cat, item, _id, save_dir):
+    def save_all_pages_json(self, cat, item, _id, save_dir, time_stamp=False):
         save_path = os.path.join(save_dir, 'JSON', cat, item)
-        save_filename = str(_id) + '.json'
+        if time_stamp:
+            save_filename = str(_id) + str(int(time.time())) + '.json'
+        else:
+            save_filename = str(_id) + '.json'
         if not os.path.isdir(save_path):
             os.makedirs(save_path)
         res = self.get_all_pages_json(cat, item, _id)
