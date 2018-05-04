@@ -8,8 +8,11 @@ def machine_backup_complete(cookie_path, url_token, save_path):
     machine.save_all_pages_json('Miscellaneous', 'Profile', url_token, save_path)
     for item in ['Followers', 'Followees', 'FollowingQuestions', 'FollowingTopics', 'FollowingColumns',
                  'FollowingFavlists', 'Questions', 'Answers', 'Pins', 'Articles', 'Columns', 'Favlists', 'Activities']:
-        print('Processing', item)
+        print('Downloading json:', item)
         machine.save_all_pages_json('Members', item, url_token, save_path)
+    for item in ['Questions', 'Answers', 'Articles']:
+        print('Downloading html:', item)
+        machine.save_all_html(item, url_token, save_path)
 
 
 if __name__ == '__main__':
