@@ -115,7 +115,7 @@ Add Pin (发布想法)
 ------------------------------
 You need to pass additional information as follows:
 
-:code:`content` is a string containing the content. The content should be wrapped with :code:`<p>xxxxx</p>`.
+:code:`content` should be of form :code:`json.dumps([{'type':'text','content':'<p>xxxxxxx</p>'}])`, where 'xxxx' is your pin content.
 
 .. code:: python
 
