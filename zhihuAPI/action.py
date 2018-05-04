@@ -84,6 +84,15 @@ APIURLACTION = {
             'url': 'https://www.zhihu.com/api/v4/favlists',
             # title and description are strings, is_public is boolean
             'required_keys': ['title', 'description', 'is_public']
+        },
+        # 举报
+        'Report': {
+            'method': 'post',
+            'url': 'https://www.zhihu.com/api/v4/reports',
+            'data': {'source': 'web'},
+            # type should be one of 'answer', 'question', 'pin', 'article', 'comment', 'member'
+            # corresponding reason_types are listed in docs
+            'required_keys': ['resource_id', 'type', 'reason_type', 'custom_reason']
         }
     },
     'Members': {

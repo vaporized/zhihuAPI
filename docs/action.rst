@@ -136,6 +136,40 @@ You need to pass additional information as follows:
 
     machine.action('Me','CreateFavlist', '', _data={'title':..., 'description':..., 'is_public':...})
 
+Report (举报)
+---------------
+You need to pass additional information as follows:
+
+:code:`resource_id` is the ID of the content to report.
+
+:code:`type` is a string, should be one of :code:`['answer', 'question', 'pin', 'article', 'comment', 'member']`
+
+:code:`custom_reason` is a string containing the description when applicable, empty string otherwise.
+
+:code:`reason_type` is a string. It has different sets of options for each category as listed. The items with (custom) means
+that it requires a custom description. The "old" option corresponds to "others" in the visible list.
+
+:Questions:
+    ambiguity, subjective, rumour, abuse, provoke, medicine, personal, superstition, spam (custom), politics, porn, suicide, illegality (custom), old (custom).
+
+
+:Answers and Articles:
+    spam (custom), abuse, unfriendly (custom), politics,porn, untruth (custom), suicide, illegality (custom), repost (custom), temptation (custom), old (custom).
+
+
+:Pins and Comments:
+    spam (custom), abuse, unfriendly (custom), politics, porn, untruth (custom), suicide, illegality (custom), old (custom).
+
+
+:Members:
+    impersonate (custom), spam, profile (custom), old (custom).
+
+
+Note: Reporting favorite lists is not included because it uses the old API.
+
+.. code:: python
+
+    machine.action('Me','Report', '', _data={'resource_id':..., 'type':..., 'reason_type':..., 'custom_reason':...})
 
 Follow a User (关注用户)
 ------------------------------
