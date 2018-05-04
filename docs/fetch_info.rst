@@ -40,6 +40,13 @@ Question Information (问题信息)
     machine.get_all_pages_json('Miscellaneous','Question', question_id)
 
 
+Answer Information (回答信息)
+--------------------------------
+.. code:: python
+
+    machine.get_all_pages_json('Miscellaneous','Answer', answer_id)
+
+
 Preview of Messages (私信预览)
 -------------------------------
 .. code:: python

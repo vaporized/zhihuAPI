@@ -8,6 +8,8 @@ APIURLGET = {
         'Topic': 'https://www.zhihu.com/api/v4/topics/{}',
         # 问题信息
         'Question': 'https://www.zhihu.com/api/v4/questions/{}',
+        # 回答信息
+        'Answer': 'https://www.zhihu.com/api/v4/answers/{}',
         # 私信
         'Messages': 'https://www.zhihu.com/api/v4/me/message-threads',
         # 通知
