@@ -31,7 +31,15 @@ class ZhihuAPIError(Exception):
 
 
 class ZhihuAccount:
+    """ A class that provides functions to access the APIs.
+        ZhihuAccount should be initialized with a cookie file.
+
+    """
     def __init__(self, path):
+        """
+        Args:
+            path: path to cookie file.
+        """
         with open(path) as f:
             cookies_tmp = json.load(f)
         self.cookies = {item['name']: item['value'] for item in cookies_tmp if item['domain'] == '.zhihu.com'}
@@ -40,6 +48,18 @@ class ZhihuAccount:
                           'Chrome/65.0.3325.181 Safari/537.36'}
 
     def get_url_json(self, url, _params=None):
+        """
+        Executes GET on specified url.
+
+        Args:
+            url: The API url to fetch data from.
+            _params: Additional parameters. Note that zhihu uses comma separated parameters,
+                    for example: {'include':['a,b']}
+
+        Returns:
+            dictionary: Query result.
+
+        """
         if _params is None:
             _params = {}
         resp = requests.get(url, cookies=self.cookies, headers=self.headers, params=_params)
@@ -55,11 +75,37 @@ class ZhihuAccount:
                 raise ZhihuAPIError
 
     def get_page_json(self, cat, item, _id, _params=None):
+        """
+        Executes GET for specified API.
+
+        Args:
+            cat: The category of the API (first level key).
+            item: The name of the API (second level key).
+            _id: The ID to fill for the API url. Could be empty for some APIs.
+            _params: Additional parameters.
+
+        Returns:
+            dictionary: Query result.
+
+        """
         if _params is None:
             _params = {}
         return self.get_url_json(APIURLGET[cat][item].format(_id), _params)
 
     def get_all_pages_json(self, cat, item, _id, _params=None):
+        """
+        Executes GET for specified API, returns the complete list of data if paging is present.
+
+        Args:
+            cat: The category of the API (first level key).
+            item: The name of the API (second level key).
+            _id: The ID to fill for the API url. Could be empty for some APIs.
+            _params: Additional parameters.
+
+        Returns:
+            dictionary or list: Complete results from the query, type depends on paging information.
+
+        """
         if _params is None:
             _params = {}
         current = self.get_page_json(cat, item, _id, _params)
@@ -74,7 +120,21 @@ class ZhihuAccount:
                 data_list += current['data']
             return data_list
 
-    def save_all_pages_json(self, cat, item, _id, save_dir, time_stamp=False):
+    def save_all_pages_json(self, cat, item, _id, save_dir, _params=None, time_stamp=False):
+        """
+        Saves the result of get_all_pages_json
+
+        Args:
+            cat: The category of the API (first level key).
+            item: The name of the API (second level key).
+            _id: The ID to fill for the API url. Could be empty for some APIs.
+            save_dir: The directory to save files.
+            _params: Additional parameters.
+            time_stamp: Add time stamp in the file name.
+
+        Returns:
+            None
+        """
         save_path = os.path.join(save_dir, 'JSON', cat, item)
         if time_stamp:
             save_filename = str(_id) + str(int(time.time())) + '.json'
@@ -82,11 +142,20 @@ class ZhihuAccount:
             save_filename = str(_id) + '.json'
         if not os.path.isdir(save_path):
             os.makedirs(save_path)
-        res = self.get_all_pages_json(cat, item, _id)
+        res = self.get_all_pages_json(cat, item, _id, _params)
         with open(os.path.join(save_path, save_filename), 'w+') as f:
             json.dump(res, f, indent=4, ensure_ascii=False)
 
     def get_html(self, url):
+        """
+        Gets HTML from url. Removes scripts.
+
+        Args:
+            url: The url to save.
+
+        Returns:
+            string: Contains the HTML code.
+        """
         resp = requests.get(url, cookies=self.cookies, headers=self.headers)
         if resp.status_code != requests.codes.ok:
             print("Status code:", resp.status_code, "for", url)
@@ -95,6 +164,18 @@ class ZhihuAccount:
             return re.sub("<script.*?</script>", '', resp.text)
 
     def save_html(self, url, item, save_dir, author=None):
+        """
+        Saves HTML to file.
+
+        Args:
+            url: The url to save.
+            item: The category to save. Available: ['Questions', 'Answers', 'Articles']
+            save_dir: The path to save.
+            author: Save files within a folder with author's name.
+
+        Returns:
+            None
+        """
         if author:
             save_path = os.path.join(save_dir, 'HTML', author, item)
         else:
@@ -107,11 +188,36 @@ class ZhihuAccount:
             f.write(content)
 
     def save_all_html(self, item, user_id, save_dir, author=None):
+        """
+        Saves all HTMLs of a category of a user.
+
+        Args:
+            item: The category to save. Available: ['Questions', 'Answers', 'Articles']
+            user_id: The user url token.
+            save_dir: The path to save.
+            author: Save files within a folder with author's name.
+
+        Returns:
+            None
+        """
         info_list = self.get_all_pages_json('Members', item, user_id)
         for dic in info_list:
             self.save_html(dic['url'], item, save_dir, author)
 
     def action(self, cat, item, _id, _data=None, _params=None):
+        """
+        Executes actions for specified APIs.
+
+        Args:
+            cat: The category of the API (first level key).
+            item: The name of the API (second level key).
+            _id: The ID to fill for the API url. Could be empty for some APIs.
+            _data: A dictionary of data to pass into payload.
+            _params: Additional parameters.
+
+        Returns:
+            dictionary: Action result or query result.
+        """
         if _data is None:
             _data = {}
         if _params is None:

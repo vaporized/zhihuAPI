@@ -53,7 +53,7 @@ API Documentation and Examples
 .. toctree::
    :maxdepth: 2
 
-
+   account.rst
    fetch_info.rst
    action.rst
    examples.rst
