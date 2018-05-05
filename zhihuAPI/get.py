@@ -2,20 +2,14 @@ APIURLGET = {
     'Miscellaneous': {
         # 账号信息
         'Me': 'https://www.zhihu.com/api/v4/me',
-        # 用户信息
-        'Profile': 'https://www.zhihu.com/api/v4/members/{}',
-        # 话题信息
-        'Topic': 'https://www.zhihu.com/api/v4/topics/{}',
-        # 问题信息
-        'Question': 'https://www.zhihu.com/api/v4/questions/{}',
-        # 回答信息
-        'Answer': 'https://www.zhihu.com/api/v4/answers/{}',
         # 私信
         'Messages': 'https://www.zhihu.com/api/v4/me/message-threads',
         # 通知
         'Notifications': 'https://www.zhihu.com/api/v4/notifications/v2/default'
     },
     'Members': {
+        # 用户信息
+        'Info': 'https://www.zhihu.com/api/v4/members/{}',
         # 关注的人
         'Followees': 'https://www.zhihu.com/api/v4/members/{}/followees',
         # 关注者
@@ -44,6 +38,8 @@ APIURLGET = {
         'Activities': 'https://www.zhihu.com/api/v4/members/{}/activities'
     },
     'Questions': {
+        # 问题信息
+        'Info': 'https://www.zhihu.com/api/v4/questions/{}',
         # 关注者
         'Followers': 'https://www.zhihu.com/api/v4/questions/{}/concerned_followers',
         # 评论
@@ -61,20 +57,38 @@ APIURLGET = {
 
     },
     'Answers': {
+        # 回答信息
+        'Info': 'https://www.zhihu.com/api/v4/answers/{}',
         # 点赞者
         'Upvoters': 'https://www.zhihu.com/api/v4/answers/{}/concerned_upvoters',
         # 评论
         'Comments': 'https://www.zhihu.com/api/v4/answers/{}/comments'
     },
     'Comments': {
+        # 评论信息
+        'Info': 'https://www.zhihu.com/api/v4/comments/{}',
         # 包含某评论的对话
         'CommentsWithConversation': 'https://www.zhihu.com/api/v4/comments/{}/conversation'
     },
     'Pins': {
+        # 想法信息
+        'Info': 'https://www.zhihu.com/api/v4/pins/{}',
         # 评论
         'Comments': 'https://www.zhihu.com/api/v4/pins/{}/comments'
     },
+    'Favlists': {
+        # 收藏夹信息
+        'Info': 'https://www.zhihu.com/api/v4/favlists/{}',
+        # 收藏夹内容
+        'Items': 'http://www.zhihu.com/api/v4/favlists/{}/items',
+        # 收藏夹评论
+        'Comments': 'http://www.zhihu.com/api/v4/favlists/{}/comments',
+        # 收藏夹关注者
+        'Followers': 'http://www.zhihu.com/api/v4/favlists/{}/followers'
+    },
     'Topics': {
+        # 话题信息
+        'Info': 'https://www.zhihu.com/api/v4/topics/{}',
         # 关注者
         'Followers': 'https://www.zhihu.com/api/v4/topics/{}/followers',
         # 精华
@@ -91,12 +105,16 @@ APIURLGET = {
         'TimelineActivities': 'https://www.zhihu.com/api/v4/topics/{}/feeds/timeline_activity'
     },
     'Articles': {
+        # 文章信息
+        'Info': 'https://zhuanlan.zhihu.com/api/posts/{}',
         # 点赞者
         'Upvoters': 'https://zhuanlan.zhihu.com/api/posts/{}/likers',
         # 文章评论
         'Comments': 'https://zhuanlan.zhihu.com/api/posts/{}/comments'
     },
     'Columns': {
+        # 专栏信息
+        'Info': 'https://zhuanlan.zhihu.com/api/columns/{}',
         # 关注者
         'Followers': 'https://zhuanlan.zhihu.com/api/columns/{}/followers',
         # 文章
