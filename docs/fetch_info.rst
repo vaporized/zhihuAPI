@@ -12,27 +12,27 @@ Assuming you have created an instance:
 
 All code examples uses :code:`get_all_pages_json`, it can be replaced with :code:`save_all_pages_json`.
 
-Miscellaneous
+Account
 ----------------
 
 My Information (账号信息)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. code:: python
 
-    machine.get_all_pages_json('Miscellaneous','Me','')
+    machine.get_all_pages_json('Me','Info','')
 
 
 Preview of Messages (私信预览)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. code:: python
 
-    machine.get_all_pages_json('Miscellaneous','Messages', '')
+    machine.get_all_pages_json('Me','Messages', '')
 
 Notifications (通知)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. code:: python
 
-    machine.get_all_pages_json('Miscellaneous','Notifications', '')
+    machine.get_all_pages_json('Me','Notifications', '')
 
 Members
 -----------

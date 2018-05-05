@@ -3,7 +3,7 @@ from zhihuAPI.account import ZhihuAccount
 
 def mourn_machines(cookie_path):
     machine = ZhihuAccount(cookie_path)
-    current_url_token = machine.get_page_json('Miscellaneous', 'Me', '')['url_token']
+    current_url_token = machine.get_page_json('Me', 'Info', '')['url_token']
     people = machine.get_all_pages_json('Members', 'Followers', current_url_token)
     for person in people:
         if person['name'] == '[已重置]':

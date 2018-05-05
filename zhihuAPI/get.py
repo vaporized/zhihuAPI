@@ -1,7 +1,7 @@
 APIURLGET = {
-    'Miscellaneous': {
+    'Me': {
         # 账号信息
-        'Me': 'https://www.zhihu.com/api/v4/me',
+        'Info': 'https://www.zhihu.com/api/v4/me',
         # 私信
         'Messages': 'https://www.zhihu.com/api/v4/me/message-threads',
         # 通知
