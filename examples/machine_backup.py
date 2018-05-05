@@ -5,8 +5,7 @@ from zhihuAPI.account import ZhihuAccount
 
 def machine_backup_complete(cookie_path, url_token, save_path):
     machine = ZhihuAccount(cookie_path)
-    machine.save_all_pages_json('Miscellaneous', 'Profile', url_token, save_path)
-    for item in ['Followers', 'Followees', 'FollowingQuestions', 'FollowingTopics', 'FollowingColumns',
+    for item in ['Info', 'Followers', 'Followees', 'FollowingQuestions', 'FollowingTopics', 'FollowingColumns',
                  'FollowingFavlists', 'Questions', 'Answers', 'Pins', 'Articles', 'Columns', 'Favlists', 'Activities']:
         print('Downloading json:', item)
         machine.save_all_pages_json('Members', item, url_token, save_path)

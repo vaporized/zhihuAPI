@@ -5,7 +5,7 @@ from zhihuAPI.account import ZhihuAccount
 
 def machine_status(cookie_path, url_token):
     machine = ZhihuAccount(cookie_path)
-    res = machine.get_page_json('Miscellaneous', 'Profile', url_token,
+    res = machine.get_page_json('Members', 'Info', url_token,
                                 {'include': ['account_status,is_force_renamed']})
     account_status = res['account_status']
     if not account_status:

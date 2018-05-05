@@ -7,7 +7,7 @@ def mourn_machines(cookie_path):
     people = machine.get_all_pages_json('Members', 'Followers', current_url_token)
     for person in people:
         if person['name'] == '[已重置]':
-            if machine.get_page_json('Miscellaneous', 'Profile', person['id'], {'include': ['account_status']})[
+            if machine.get_page_json('Members', 'Info', person['id'], {'include': ['account_status']})[
                 'account_status'][0]['name'] == 'hang':
                 machine.action('Me', 'SendMessage', '', {'content': 'RIP', 'receiver_hash': person['id']})
 
