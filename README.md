@@ -53,4 +53,7 @@ Requesting Features
 --------------------
 If you need some feature that is unavailable in the package, please post an issue and I will add it if it is achievable via calling APIs alone.
 
+Notice
+-----------
+From June 12th, 2018, Zhihu blocked all access (including API access) to banned accounts(停用，非禁言/限制). Therefore backing up / querying status of those accounts is no longer possible. Please perform backups of your accounts frequently before its lifespan ends.
 
